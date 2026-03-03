@@ -1,0 +1,156 @@
+
+<!-- Estado de carregamento -->
+<div *ngIf="loading" class="loading-container">
+  <div class="spinner"></div>
+  <p>Carregando países...</p>
+</div>
+
+<!-- Estado de erro -->
+<div *ngIf="error" class="error-container">
+  <p class="error-message">Erro ao carregar países. Tente novamente mais tarde.</p>
+</div>
+
+<!-- Lista de países -->
+<div *ngIf="!loading && !error && countries.length > 0" class="table-container">
+  <div class="header-with-button">
+    <div>
+      <h2>Lista de Países</h2>
+      <p class="table-info">
+        Mostrando {{ filteredCountries.length }} de {{ countries.length }} países
+      </p>
+    </div>
+      <!-- Botão para limpar filtros (aparece apenas quando há filtros ativos) -->
+  <div class="filter-actions" *ngIf="hasActiveFilters()">
+    <button class="btn-clear-filters" (click)="clearAllFilters()">
+      <span class="btn-icon">✕</span>
+      Limpar todos os filtros
+    </button>
+  </div>
+  <div>
+    <button class="btn-reload" (click)="reloadCountries()" [disabled]="loading">
+      <span class="btn-icon">↻</span>
+      Recarregar <!-- Corrigido: era "Filtrar" -->
+    </button>
+    </div>
+  </div>
+
+  <table class="countries-table">
+    <thead>
+      <tr>
+        <!-- Bandeira -->
+        <th class="filter-header">
+          <div class="header-content">
+            <span>Bandeira</span>
+          </div>
+        </th>
+
+        <!-- Nome -->
+        <th class="filter-header">
+          <div class="header-content">
+            <span>Nome</span>
+            <input
+              type="text"
+              class="header-filter-input"
+              placeholder="Filtrar por nome..."
+              (input)="filterByName($event)"
+              [value]="nameFilter"
+              [class.active]="nameFilter">
+          </div>
+        </th>
+
+        <!-- População -->
+        <th class="filter-header">
+          <div class="header-content">
+            <span>População</span>
+            <select class="header-filter-select" (change)="filterByPopulation($event)" [class.active]="populationFilter">
+              <option value="">Todos</option>
+              <option value="asc">↑ Crescente</option>
+              <option value="desc">↓ Decrescente</option>
+              <option value="million">+1 milhão</option>
+              <option value="billion">+1 bilhão</option>
+            </select>
+          </div>
+        </th>
+
+        <!-- Região -->
+        <th class="filter-header">
+          <div class="header-content">
+            <span>Região</span>
+            <select class="header-filter-select" (change)="filterByRegion($event)" [value]="selectedRegion" [class.active]="selectedRegion">
+              <option value="">Todas</option>
+              <option *ngFor="let region of uniqueRegions" [value]="region">
+                {{ region }}
+              </option>
+            </select>
+          </div>
+        </th>
+
+        <!-- Capital -->
+        <th class="filter-header">
+          <div class="header-content">
+            <span>Capital</span>
+            <input
+              type="text"
+              class="header-filter-input"
+              placeholder="Filtrar por capital..."
+              (input)="filterByCapital($event)"
+              [value]="capitalFilter"
+              [class.active]="capitalFilter">
+          </div>
+        </th>
+
+        <!-- Idiomas -->
+        <th class="filter-header">
+          <div class="header-content">
+            <span>Idiomas</span>
+            <input
+              type="text"
+              class="header-filter-input"
+              placeholder="Filtrar por idioma..."
+              (input)="filterByLanguage($event)"
+              [value]="languageFilter"
+              [class.active]="languageFilter">
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let country of filteredCountries; trackBy: trackByCode">
+        <td class="flag-cell">
+          <img *ngIf="country.flags?.png" [src]="country.flags?.png"
+               [alt]="'Bandeira de ' + country.name.common"
+               class="country-flag"
+               (click)="showCountryDetails(country)">
+          <span *ngIf="!country.flags?.png">-</span>
+        </td>
+        <td class="country-name">{{ country.name.common }}</td>
+        <td class="population">{{ country.population | number }}</td>
+        <td>{{ country.region }}</td>
+        <td>{{ country.capital?.[0] || '-' }}</td>
+        <td class="languages">{{ getLanguagesList(country.languages) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+<!-- Mensagem quando não há países filtrados -->
+<div *ngIf="!loading && !error && countries.length > 0 && filteredCountries.length === 0"
+     class="info-strip">
+  <div class="strip-container">
+    <div class="strip-message">
+      <span>Nenhum país encontrado com os filtros atuais</span>
+    </div>
+    <button class="strip-btn" (click)="clearAllFilters()">
+      <span class="btn-icon">✕</span>
+      Remover filtros
+    </button>
+  </div>
+</div>
+
+<!-- Mensagem quando não há países -->
+<div *ngIf="!loading && !error && countries.length === 0" class="empty-container">
+  <p>Nenhum país encontrado.</p>
+</div>
