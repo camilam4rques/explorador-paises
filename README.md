@@ -1,160 +1,382 @@
-🌍 Explorador de Países
-Uma aplicação web desenvolvida em Angular para explorar informações sobre países ao redor do mundo, consumindo a REST Countries API.
+# 🌍 Countries Explorer
 
-✨ Funcionalidades
-📋 Lista de Países: Visualize uma lista com 50 países
+Uma aplicação web desenvolvida em **Angular** que permite explorar informações sobre países ao redor do mundo utilizando a **REST Countries API**.
 
-🔍 Filtros em Tempo Real: Filtre países por:
+This is a **web application built with Angular** that allows users to explore information about countries around the world using the **REST Countries API**.
 
-Nome
+---
 
-Região
+# 🇧🇷 Português
 
-Capital
+## 📌 Sobre o Projeto
 
-Idioma
+O **Countries Explorer** é uma aplicação web que consome a API pública **REST Countries** para exibir informações detalhadas sobre países.
 
-População (crescente, decrescente, +1 milhão, +1 bilhão)
+A aplicação permite **filtrar, pesquisar e visualizar informações relevantes**, como bandeiras, população, idioma, região e capital.
 
-🏳️ Bandeiras: Visualize as bandeiras dos países com efeito de zoom
+Este projeto foi desenvolvido como **teste técnico para vaga de desenvolvedor Angular**, com foco em:
 
-📱 Design Responsivo: Interface adaptável para desktop, tablet e mobile
+* boas práticas de arquitetura
+* organização de código
+* consumo de APIs
+* reatividade com RxJS
+* interface responsiva
 
-⚡ Carregamento Otimizado: Spinner de carregamento e tratamento de erros
+---
 
-🔄 Recarregar Dados: Atualize a lista com novos dados da API
+## ✨ Funcionalidades
 
-🚀 Tecnologias Utilizadas
-Angular 21 - Framework front-end
+* 🌎 **Lista de países**
 
-TypeScript - Superset JavaScript com tipagem estática
+  * Exibição inicial de **50 países**
 
-RxJS - Programação reativa
+* 🔎 **Filtros em tempo real**
 
-REST Countries API - Fonte de dados sobre países
+  * Nome
+  * Região
+  * Capital
+  * Idioma
+  * População
 
-📋 Pré-requisitos
-Antes de começar, você precisará ter instalado em sua máquina:
+* 📊 **Filtros de população**
 
-Node.js (versão 18 ou superior)
+  * Crescente
+  * Decrescente
+  * Mais de 1 milhão
+  * Mais de 1 bilhão
 
-Angular CLI (versão 21.2.0)
+* 🏳️ **Bandeiras dos países**
 
-Git
+  * Visualização das bandeiras
+  * Efeito de **zoom ao passar o mouse**
 
-🛠️ Instalação e Execução
+* 📱 **Design Responsivo**
+
+  * Desktop
+  * Tablet
+  * Mobile
+
+* ⚡ **Experiência de usuário**
+
+  * Spinner de carregamento
+  * Tratamento de erros
+  * Mensagem quando nenhum resultado é encontrado
+
+* 🔄 **Atualização de dados**
+
+  * Botão para recarregar dados da API
+
+---
+
+## 🧰 Tecnologias Utilizadas
+
+* **Angular 21**
+* **TypeScript**
+* **RxJS**
+* **REST Countries API**
+* **HTML5**
+* **CSS3**
+
+---
+
+## 📋 Pré-requisitos
+
+Antes de executar o projeto, certifique-se de ter instalado:
+
+* **Node.js** (18 ou superior)
+* **Angular CLI** (21.2.0 ou superior)
+* **Git**
+
+---
+
+## ⚙️ Instalação
+
 Clone o repositório
 
-bash
+```bash
 git clone https://github.com/seu-usuario/explorador-paises.git
 cd explorador-paises
+```
+
 Instale as dependências
 
-bash
+```bash
 npm install
-Inicie o servidor de desenvolvimento
+```
 
-bash
+Execute o projeto
+
+```bash
 ng serve
-Acesse a aplicação
-Abra o navegador e vá para http://localhost:4200/
+```
 
-A aplicação será recarregada automaticamente sempre que você modificar qualquer arquivo fonte.
+Abra no navegador
 
-📁 Estrutura do Projeto
-text
-explorador-paises/
-├── src/
-│   ├── app/
-│   │   ├── core/
-│   │   │   ├── models/
-│   │   │   │   └── country.model.ts
-│   │   │   └── services/
-│   │   │       └── countries.service.ts
-│   │   └── features/
-│   │       └── countries/
-│   │           └── pages/
-│   │               └── countries-list/
-│   │                   ├── countries-list.component.ts
-│   │                   ├── countries-list.html
-│   │                   └── countries-list.css
-│   ├── assets/
-│   ├── index.html
-│   └── styles.css
-├── angular.json
-├── package.json
-└── README.md
-🎯 Como Usar
-Filtros
-Nome: Digite no campo "Filtrar por nome..." para buscar países específicos
+```
+http://localhost:4200
+```
 
-População: Use o seletor para ordenar ou filtrar por faixa populacional
+---
 
-Região: Selecione uma região para ver apenas países daquela área
+## 📂 Estrutura do Projeto
 
-Capital: Digite para filtrar por capital
+```
+src/
+ ├── app/
+ │   ├── core/
+ │   │   ├── models/
+ │   │   │   └── country.model.ts
+ │   │   └── services/
+ │   │       └── countries.service.ts
+ │   │
+ │   └── features/
+ │       └── countries/
+ │           └── pages/
+ │               └── countries-list/
+ │                   ├── countries-list.component.ts
+ │                   ├── countries-list.component.html
+ │                   └── countries-list.component.css
+ │
+ ├── assets/
+ ├── styles.css
+ └── index.html
+```
 
-Idioma: Digite para filtrar por idioma oficial
+A estrutura segue um padrão de organização baseado em:
 
-Recarregar Dados
-Clique no botão "Recarregar" para buscar novos dados da API.
+* **core** → serviços e modelos globais
+* **features** → funcionalidades da aplicação
 
-Visualizar Detalhes
-Passe o mouse sobre a bandeira para ampliar ou clique para ver detalhes do país.
+---
 
-🏗️ Comandos Úteis
-Gerar um novo componente
-bash
-ng generate component nome-do-componente
-Gerar um serviço
-bash
-ng generate service core/services/nome-do-servico
-Gerar um modelo/model
-bash
-ng generate interface core/models/nome-do-modelo
-Construir o projeto para produção
-bash
-ng build
-Os artefatos de build serão armazenados no diretório dist/.
+## 🎯 Como Usar
 
-Executar testes unitários
-bash
+### Filtrar países
+
+Você pode filtrar países utilizando os seguintes campos:
+
+* **Nome**
+* **Região**
+* **Capital**
+* **Idioma**
+* **População**
+
+Os filtros são aplicados **em tempo real**.
+
+---
+
+### Recarregar dados
+
+Clique no botão **Recarregar** para buscar novamente os dados da API.
+
+---
+
+### Visualizar detalhes
+
+Passe o mouse sobre a bandeira para visualizar o **efeito de zoom**.
+
+---
+
+## 🧪 Testes
+
+Executar testes unitários:
+
+```bash
 ng test
-Os testes são executados com o Vitest.
+```
 
-Executar testes end-to-end
-bash
-ng e2e
-📱 Responsividade
-A aplicação é totalmente responsiva:
+---
 
-Desktop: Layout completo com tabela e todos os filtros
+## 🏗️ Build de Produção
 
-Tablet: Ajustes de espaçamento e esconder tooltips
+```bash
+ng build
+```
 
-Mobile: Filtros em coluna e tabela com rolagem horizontal
+Os arquivos gerados ficarão em:
 
-🎨 Estilização
-Design moderno com gradientes e sombras
+```
+dist/
+```
 
-Efeitos hover em elementos interativos
+---
 
-Spinner animado durante carregamento
+## 📱 Responsividade
 
-Tooltips informativos
+A aplicação foi desenvolvida com layout responsivo:
 
-Tarja de aviso quando nenhum resultado é encontrado
+| Dispositivo | Comportamento                         |
+| ----------- | ------------------------------------- |
+| Desktop     | Tabela completa e filtros             |
+| Tablet      | Ajuste de espaçamento                 |
+| Mobile      | Filtros em coluna e scroll horizontal |
 
-🤝 Contribuindo
-Faça um fork do projeto
+---
 
-Crie uma branch para sua feature (git checkout -b feature/AmazingFeature)
+## 📄 Licença
 
-Commit suas mudanças (git commit -m 'Add some AmazingFeature')
+Este projeto está sob a licença **MIT**.
 
-Push para a branch (git push origin feature/AmazingFeature)
+---
 
-Abra um Pull Request
+# 🇺🇸 English
 
-📄 Licença
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+## 📌 About the Project
+
+**Countries Explorer** is a web application that consumes the **REST Countries API** to display detailed information about countries around the world.
+
+The application allows users to **search, filter and explore country information**, including flags, population, language, region, and capital.
+
+This project was developed as a **technical assessment for an Angular developer position**, focusing on:
+
+* clean architecture
+* code organization
+* API consumption
+* reactive programming with RxJS
+* responsive UI
+
+---
+
+## ✨ Features
+
+* 🌍 **Countries list**
+
+  * Displays an initial list of **50 countries**
+
+* 🔎 **Real-time filters**
+
+  * Name
+  * Region
+  * Capital
+  * Language
+  * Population
+
+* 📊 **Population filters**
+
+  * Ascending
+  * Descending
+  * Over 1 million
+  * Over 1 billion
+
+* 🏳️ **Country flags**
+
+  * Flag visualization
+  * **Hover zoom effect**
+
+* 📱 **Responsive design**
+
+  * Desktop
+  * Tablet
+  * Mobile
+
+* ⚡ **User experience improvements**
+
+  * Loading spinner
+  * Error handling
+  * Empty state message
+
+* 🔄 **Data refresh**
+
+  * Button to reload API data
+
+---
+
+## 🧰 Technologies Used
+
+* **Angular 21**
+* **TypeScript**
+* **RxJS**
+* **REST Countries API**
+* **HTML**
+* **CSS**
+
+---
+
+## 📋 Prerequisites
+
+Before running the project, make sure you have installed:
+
+* **Node.js** (18+)
+* **Angular CLI**
+* **Git**
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/countries-explorer.git
+cd countries-explorer
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+ng serve
+```
+
+Open in your browser
+
+```
+http://localhost:4200
+```
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+ ├── app/
+ │   ├── core/
+ │   │   ├── models/
+ │   │   └── services/
+ │   │
+ │   └── features/
+ │       └── countries/
+ │           └── pages/
+ │               └── countries-list/
+ │
+ ├── assets/
+ └── styles.css
+```
+
+The structure follows a **feature-based architecture**.
+
+---
+
+## 🧪 Running Tests
+
+```bash
+ng test
+```
+
+---
+
+## 🏗️ Production Build
+
+```bash
+ng build
+```
+
+Build artifacts will be stored in:
+
+```
+dist/
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---

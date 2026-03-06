@@ -27,7 +27,7 @@ export class CountriesService {
 
   getCountryByCode(code: string): Observable<Country[]> {
     return this.http.get<Country[]>(
-      `${this.baseUrl}/alpha/${code}?fields=name,cca3,population,region,subregion,capital,flags,borders,languages,currencies`
+      `${this.baseUrl}/alpha/${code}`
     );
   }
 

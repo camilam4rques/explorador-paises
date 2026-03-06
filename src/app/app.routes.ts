@@ -3,16 +3,7 @@ import { CountriesList} from './features/countries/pages/countries-list/countrie
 import { CountryDetail } from './features/countries/pages/country-detail/country-detail';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: CountriesList
-  },
-  {
-    path: 'country/:code',
-    component: CountryDetail
-  },
-  {
-    path: '**',
-    redirectTo: ''
-  }
+  {    path: '',    component: CountriesList  },
+  {    path: 'countries/:id',component: CountryDetail  },
+  {    path: '**',    redirectTo: ''  }
 ];

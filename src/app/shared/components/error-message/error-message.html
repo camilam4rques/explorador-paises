@@ -1,1 +1,12 @@
-<p>error-message works!</p>
+<div class="error-container">
+  <div class="error-box">
+    <div class="error-icon">⚠️</div>
+    <p class="error-text">{{ message }}</p>
+
+    <button *ngIf="showRetry"
+            class="btn-retry"
+            (click)="onRetry()">
+      Tentar novamente
+    </button>
+  </div>
+</div>

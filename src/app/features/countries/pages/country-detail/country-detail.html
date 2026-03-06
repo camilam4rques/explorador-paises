@@ -1,1 +1,85 @@
-<p>country-detail works!</p>
+<div class="detail-container" *ngIf="!error && country">
+  <div class="hero-section">
+    <div class="hero-title">
+      <button class="btn-back" (click)="goBack()">
+        Back
+      </button>
+      <div class="hero-titles">
+        <h1>{{ country.name.common }}</h1>
+        <h2>{{ country.name.official }}</h2>
+      </div>
+    </div>
+
+    <div class="flags-container">
+      <div class="flags-images">
+        <img [src]="country.flags?.png" [alt]="country.flags?.alt || 'Flag of ' + country.name.common"
+          class="hero-flag">
+        <img [src]="country.coatOfArms?.png" [alt]="'Coat of Arms of ' + country.name.common" class="hero-flag">
+      </div>
+      <div class="flag-info">
+        <h1>Flag</h1>
+        <p>{{ country.flags?.alt || 'Official flag of ' + country.name.common }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-row">
+    <div class="map-column">
+      <div class="map-container">
+        <iframe [src]="getMapUrl()" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="borders-column" *ngIf="country.borders?.length">
+      <div class="details-card">
+        <h3 class="details-title">Bordering Countries</h3>
+        <div class="borders-list">
+          <div class="border-item" *ngFor="let border of country.borders" (click)="viewBorderCountry(border)">
+            <img [src]="getBorderFlag(border)" [alt]="'Flag of ' + getBorderCountryName(border)" class="border-flag"
+              (error)="onBorderFlagError($event)">
+            <span class="border-name">{{ getBorderCountryName(border) || border }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-full-width">
+    <div class="info-section">
+      <h3>General Information</h3>
+      <div class="info-grid-2col">
+        <div class="info-item">
+          <strong>Capital:</strong> {{ country.capital?.[0] || 'Not specified' }}
+        </div>
+        <div class="info-item">
+          <strong>Region:</strong> {{ country.region }} {{ country.subregion ? '- ' + country.subregion : '' }}
+        </div>
+        <div class="info-item">
+          <strong>Population:</strong> {{ country.population | number }}
+        </div>
+        <div class="info-item">
+          <strong>Area:</strong> {{ country.area | number }} km²
+        </div>
+        <div class="info-item">
+          <strong>Time Zone:</strong> {{ country.timezones?.join(', ') }}
+        </div>
+        <div class="info-item">
+          <strong>Languages:</strong> {{ getLanguagesList(country.languages).join(', ') || 'Not specified' }}
+        </div>
+        <div class="info-item full-width" *ngIf="getCurrenciesList(country.currencies).length > 0">
+          <strong>Currencies:</strong>
+          <ul class="currencies-list">
+            <li *ngFor="let currency of getCurrenciesList(country.currencies)">
+              {{ currency.name }} ({{ currency.symbol }})
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-container" *ngIf="error">
+    <p class="error-message">Error loading country details</p>
+    <button class="btn-back" (click)="goBack()">Back</button>
+  </div>
+</div>

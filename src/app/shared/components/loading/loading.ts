@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LoadingService } from '../../../core/services/loading.service';
 
 @Component({
   selector: 'app-loading',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './loading.html',
-  styleUrl: './loading.css',
+  styleUrls: ['./loading.css']
 })
-export class Loading {}
+export class LoadingComponent {
+
+  loading$;
+
+  constructor(private loadingService: LoadingService) {
+    this.loading$ = this.loadingService.loading$;
+  }
+}
