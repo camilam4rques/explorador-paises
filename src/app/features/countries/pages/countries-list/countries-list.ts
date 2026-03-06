@@ -211,9 +211,6 @@ export class CountriesList implements OnInit {
       return true;
     });
 
-    // Aplica ordenacao
-    this.applyPopulationSort();
-
     // Reseta para primeira pagina sempre que um filtro e aplicado
     this.currentPage = 1;
     this.updatePagedCountries();
@@ -300,17 +297,6 @@ export class CountriesList implements OnInit {
     return pages;
   }
 
-  // Aplica ordenacao por populacao com base na opcao selecionada
-  private applyPopulationSort() {
-    if (!this.populationFilter || !this.filteredCountries.length)
-      return;
-
-    if (this.populationFilter === 'asc') {
-      this.filteredCountries.sort((a, b) => a.population - b.population);
-    } else if (this.populationFilter === 'desc') {
-      this.filteredCountries.sort((a, b) => b.population - a.population);
-    }
-  }
 
   // Funcao de trackBy para otimizar a renderizacao da lista
   trackByCode(index: number, country: Country): string {

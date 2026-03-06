@@ -12,15 +12,14 @@ This is a **web application built with Angular** that allows users to explore in
 
 O **Countries Explorer** é uma aplicação web que consome a API pública **REST Countries** para exibir informações detalhadas sobre países.
 
-A aplicação permite **filtrar, pesquisar e visualizar informações relevantes**, como bandeiras, população, idioma, região e capital.
+A aplicação permite **filtrar, pesquisar, ordenar e visualizar informações relevantes**, como bandeiras, população, idioma, região e capital.
+---
 
-Este projeto foi desenvolvido como **teste técnico para vaga de desenvolvedor Angular**, com foco em:
+## 🌐 Idioma da Aplicação
 
-* boas práticas de arquitetura
-* organização de código
-* consumo de APIs
-* reatividade com RxJS
-* interface responsiva
+A interface da aplicação foi desenvolvida **em inglês**.
+
+Essa decisão foi tomada porque os dados retornados pela **REST Countries API** são fornecidos **inteiramente em inglês**, como nomes de países, regiões e idiomas. Dessa forma, manter a aplicação em inglês evita inconsistências e mantém os dados exibidos exatamente como são retornados pela API pública.
 
 ---
 
@@ -33,38 +32,22 @@ Este projeto foi desenvolvido como **teste técnico para vaga de desenvolvedor A
 * 🔎 **Filtros em tempo real**
 
   * Nome
+  * População
   * Região
   * Capital
   * Idioma
-  * População
-
-* 📊 **Filtros de população**
-
-  * Crescente
-  * Decrescente
-  * Mais de 1 milhão
-  * Mais de 1 bilhão
 
 * 🏳️ **Bandeiras dos países**
 
   * Visualização das bandeiras
   * Efeito de **zoom ao passar o mouse**
 
-* 📱 **Design Responsivo**
-
-  * Desktop
-  * Tablet
-  * Mobile
-
 * ⚡ **Experiência de usuário**
 
   * Spinner de carregamento
   * Tratamento de erros
   * Mensagem quando nenhum resultado é encontrado
-
-* 🔄 **Atualização de dados**
-
-  * Botão para recarregar dados da API
+  * Mensagem de confirmação para o usuário
 
 ---
 
@@ -173,17 +156,8 @@ Clique no botão **Recarregar** para buscar novamente os dados da API.
 
 ### Visualizar detalhes
 
-Passe o mouse sobre a bandeira para visualizar o **efeito de zoom**.
+Passe o mouse sobre a bandeira para visualizar os detalhes ou clice no botão com nome 'Detais'.
 
----
-
-## 🧪 Testes
-
-Executar testes unitários:
-
-```bash
-ng test
-```
 
 ---
 
@@ -193,24 +167,6 @@ ng test
 ng build
 ```
 
-Os arquivos gerados ficarão em:
-
-```
-dist/
-```
-
----
-
-## 📱 Responsividade
-
-A aplicação foi desenvolvida com layout responsivo:
-
-| Dispositivo | Comportamento                         |
-| ----------- | ------------------------------------- |
-| Desktop     | Tabela completa e filtros             |
-| Tablet      | Ajuste de espaçamento                 |
-| Mobile      | Filtros em coluna e scroll horizontal |
-
 ---
 
 ## 📄 Licença
@@ -219,164 +175,78 @@ Este projeto está sob a licença **MIT**.
 
 ---
 
-# 🇺🇸 English
 
-## 📌 About the Project
+🛠️ Decisões técnicas
+Arquitetura e Organização
+Angular 17+ com Standalone Components
 
-**Countries Explorer** is a web application that consumes the **REST Countries API** to display detailed information about countries around the world.
+Motivo: Adotei a arquitetura standalone por ser mais moderna e facilitar a manutenção. Elimina a necessidade de NgModules, tornando o código mais limpo e as importações mais diretas.
 
-The application allows users to **search, filter and explore country information**, including flags, population, language, region, and capital.
+Estrutura de pastas modular (feature-first)
 
-This project was developed as a **technical assessment for an Angular developer position**, focusing on:
-
-* clean architecture
-* code organization
-* API consumption
-* reactive programming with RxJS
-* responsive UI
-
----
-
-## ✨ Features
-
-* 🌍 **Countries list**
-
-  * Displays an initial list of **50 countries**
-
-* 🔎 **Real-time filters**
-
-  * Name
-  * Region
-  * Capital
-  * Language
-  * Population
-
-* 📊 **Population filters**
-
-  * Ascending
-  * Descending
-  * Over 1 million
-  * Over 1 billion
-
-* 🏳️ **Country flags**
-
-  * Flag visualization
-  * **Hover zoom effect**
-
-* 📱 **Responsive design**
-
-  * Desktop
-  * Tablet
-  * Mobile
-
-* ⚡ **User experience improvements**
-
-  * Loading spinner
-  * Error handling
-  * Empty state message
-
-* 🔄 **Data refresh**
-
-  * Button to reload API data
-
----
-
-## 🧰 Technologies Used
-
-* **Angular 21**
-* **TypeScript**
-* **RxJS**
-* **REST Countries API**
-* **HTML**
-* **CSS**
-
----
-
-## 📋 Prerequisites
-
-Before running the project, make sure you have installed:
-
-* **Node.js** (18+)
-* **Angular CLI**
-* **Git**
-
----
-
-## ⚙️ Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/your-username/countries-explorer.git
-cd countries-explorer
-```
-
-Install dependencies
-
-```bash
-npm install
-```
-
-Run the development server
-
-```bash
-ng serve
-```
-
-Open in your browser
-
-```
-http://localhost:4200
-```
-
----
-
-## 📂 Project Structure
-
-```
+text
 src/
- ├── app/
- │   ├── core/
- │   │   ├── models/
- │   │   └── services/
- │   │
- │   └── features/
- │       └── countries/
- │           └── pages/
- │               └── countries-list/
- │
- ├── assets/
- └── styles.css
-```
+├── app/
+│   ├── core/           # Serviços singleton, guards, interceptors
+│   ├── features/       # Módulos de funcionalidades (countries, shared)
+│   └── shared/         # Componentes, diretivas e pipes reutilizáveis
+Motivo: Separação clara de responsabilidades e facilita a escalabilidade. Core para serviços globais, features para funcionalidades isoladas e shared para código reutilizável.
 
-The structure follows a **feature-based architecture**.
 
----
+Loading Service global
 
-## 🧪 Running Tests
+Motivo: Centraliza o controle de loading em um único lugar, evitando duplicação de código e garantindo consistência visual em toda a aplicação.
 
-```bash
-ng test
-```
 
----
+Tratamento de erros centralizado
 
-## 🏗️ Production Build
+Motivo: Interceptor para erros HTTP e serviço de notificações garantem uma experiência consistente e amigável quando algo dá errado.
 
-```bash
-ng build
-```
+Design System consistente
 
-Build artifacts will be stored in:
+Motivo: Cores (#025159 e #f28705) e componentes visuais padronizados criam uma identidade visual forte e experiência de usuário coesa.
 
-```
-dist/
-```
+Mapas com OpenStreetMap
 
----
+Motivo: Gratuito, open-source e não requer chaves de API, tornando o projeto facilmente replicável sem custos.
 
-## 📄 License
+⏱️ O que faria diferente com mais tempo
 
-This project is licensed under the **MIT License**.
+Testes automatizados
 
----
+Implementaria testes unitários mais abrangentes para serviços e componentes
+
+Adicionaria testes e2e com Cypress para garantir fluxos críticos
+
+Testes de acessibilidade (a11y) automatizados
+
+
+Performance
+
+Experiência do usuário
+
+Melhoraria a responsividade para dispositivos móveis
+
+
+
+Funcionalidades
+
+Permitir comparar dois ou mais países lado a lado
+
+Adicionar gráficos com estatísticas (população, crescimento)
+
+
+Infraestrutura
+
+Dockerizar a aplicação
+
+
+
+
+Acessibilidade
+
+Adicionar ARIA labels mais descritivos
+
+Garantir contraste de cores adequado
+
+Testar com leitores de tela
