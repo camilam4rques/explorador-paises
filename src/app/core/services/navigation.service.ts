@@ -4,17 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NavigationService {
-
   private historyStack: string[] = [];
 
   push(route: string) {
-
     const last = this.historyStack[this.historyStack.length - 1];
 
     if (last !== route) {
       this.historyStack.push(route);
     }
-
   }
 
   pop(): string | null {

@@ -1,4 +1,3 @@
-// country-detail.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -109,7 +108,7 @@ export class CountryDetail implements OnInit {
     return Object.values(currencies);
   }
 
-  // Função para gerar URL do OpenStreetMap
+  // Funcao para gerar URL do OpenStreetMap
   getMapUrl(): SafeResourceUrl | string {
     if (this.country?.latlng && this.country.latlng.length === 2) {
       const [lat, lng] = this.country.latlng;
@@ -120,7 +119,7 @@ export class CountryDetail implements OnInit {
     return '';
   }
 
-  // Função para abrir o mapa em tela cheia
+  // Funcao para abrir o mapa em tela cheia
   openFullMap() {
     if (this.country?.latlng && this.country.latlng.length === 2) {
       const [lat, lng] = this.country.latlng;
@@ -129,17 +128,17 @@ export class CountryDetail implements OnInit {
     }
   }
 
-  // Função para buscar bandeira do país fronteiriço
+  // Funcao para buscar bandeira do pais fronteirico
   getBorderFlag(borderCode: string): string {
     return this.borderCountries[borderCode]?.flags?.png ?? '';
   }
 
-  // Função para buscar nome do país fronteiriço
+  // Funcao para buscar nome do pais fronteirico
   getBorderCountryName(borderCode: string): string {
     return this.borderCountries[borderCode]?.name?.common ?? borderCode;
   }
 
-  // Função para ver país fronteiriço
+  // Funcao para ver pais fronteirico
   viewBorderCountry(borderCode: string) {
     this.router.navigate(['/countries', borderCode]);
   }

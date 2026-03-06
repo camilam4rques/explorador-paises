@@ -1,4 +1,3 @@
-// confirm-dialog.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,10 +10,10 @@ import { CommonModule } from '@angular/common';
 })
 export class ConfirmDialogComponent {
   @Input() isOpen = false;
-  @Input() title = 'Confirmar ação';
+  @Input() title = 'Confirm action';
   @Input() message = '';
-  @Input() confirmText = 'Confirmar';
-  @Input() cancelText = 'Cancelar';
+  @Input() confirmText = 'Confirm';
+  @Input() cancelText = 'Cancel';
 
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();

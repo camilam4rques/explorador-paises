@@ -34,7 +34,6 @@
     </div>
 
     <div class="actions-section">
-      <!-- Botão para limpar filtros (aparece apenas quando há filtros ativos) -->
       <div class="filter-actions" *ngIf="hasActiveFilters()">
         <button class="btn-clear-filters" (click)="clearAllFilters()">
           <span class="btn-icon">✕</span>
@@ -162,7 +161,6 @@
   </div>
 </div>
 
-<!-- Mensagem quando não há países filtrados -->
 <div *ngIf="!error && countries.length > 0 && filteredCountries.length === 0" class="info-strip">
   <div class="strip-container">
     <div class="strip-message">

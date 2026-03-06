@@ -6,9 +6,7 @@ import { Router } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { ErrorMessageComponent } from '../../../../shared/components/error-message/error-message';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog';
-
 import { finalize } from 'rxjs';
-
 
 @Component({
   selector: 'app-countries-list',
@@ -18,7 +16,6 @@ import { finalize } from 'rxjs';
   styleUrls: ['./countries-list.css']
 })
 export class CountriesList implements OnInit {
-
   countries: Country[] = [];// Lista completa de países
   filteredCountries: Country[] = [];// Lista filtrada de países
   uniqueRegions: string[] = [];// Regiões únicas para o filtro
@@ -35,8 +32,6 @@ export class CountriesList implements OnInit {
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   Math = Math;
-
-  // Adicione estas propriedades na classe CountriesList
   showConfirmDialog = false;
   confirmDialogMessage = '';
   confirmDialogTitle = '';
@@ -81,6 +76,7 @@ export class CountriesList implements OnInit {
       });
   }
 
+  // Metodo para recarregar a lista de paises, verificando se tem filtros ativos para mostrar o confirm dialog
   reloadCountries() {
     if(this.hasActiveFilters()) {
       this.confirmDialogTitle = 'Confirm action';
@@ -95,12 +91,14 @@ export class CountriesList implements OnInit {
     }
   }
 
+  // Acao confirmada no dialog para recarregar a lista, limpando os filtros
   onConfirmReload() {
     this.showConfirmDialog = false;
     this.clearAllFilters();
     this.loadCountries();
   }
 
+  // Fecha o dialog sem recarregar a lista ou limpar os filtros
   onCancelReload() {
     this.showConfirmDialog = false;
   }
@@ -248,7 +246,7 @@ export class CountriesList implements OnInit {
 
   // Se quiser manter o showCountryDetails para o clique na bandeira
   showCountryDetails(country: any) {
-    this.viewCountryDetails(country); // Reaproveita o mesmo método
+    this.viewCountryDetails(country);
   }
 
   // Metodos de paginação
@@ -261,7 +259,6 @@ export class CountriesList implements OnInit {
     if (this.currentPage > this.totalPages) {
       this.currentPage = this.totalPages || 1;
     }
-
   }
 
   // Metodo para mudar de página
@@ -332,7 +329,6 @@ export class CountriesList implements OnInit {
 
   // Metodo para ordenar a lista de paises por uma coluna especifica
   sortBy(column: string) {
-
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -392,5 +388,4 @@ export class CountriesList implements OnInit {
   formatNumber(value: number): string {
     return value.toLocaleString('pt-BR');
   }
-
 }

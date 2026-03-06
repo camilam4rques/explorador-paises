@@ -33,13 +33,13 @@ export class CountriesService {
 
   searchByName(name: string): Observable<Country[]> {
     return this.http.get<Country[]>(
-      `${this.baseUrl}/name/${name}?fields=name,cca3,population,region,capital,flags,borders,languages,currencies`
+      `${this.baseUrl}/name/${name}`
     );
   }
 
   filterByRegion(region: string): Observable<Country[]> {
     return this.http.get<Country[]>(
-      `${this.baseUrl}/region/${region}?fields=name,cca3,population,region,capital,flags`
+      `${this.baseUrl}/region/${region}`
     );
   }
 }

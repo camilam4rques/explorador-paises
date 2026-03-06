@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ErrorMessageComponent {
 
-  @Input() message: string = 'Ocorreu um erro inesperado.';
+  @Input() message: string = 'An unexpected error occurred.';
   @Input() showRetry: boolean = false;
 
   @Output() retry = new EventEmitter<void>();
